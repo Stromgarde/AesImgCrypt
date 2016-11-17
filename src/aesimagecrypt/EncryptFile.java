@@ -14,13 +14,14 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 public class EncryptFile{
 	
 	KeyGenerator keyGenerator = null;
     SecretKey secretKey = null;
     Cipher cipher = null;
-
+    byte[] raw = null;
     public EncryptFile(String destPath) {
         try {
             /**
@@ -28,8 +29,30 @@ public class EncryptFile{
              */
         	
             keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(256);
             secretKey = keyGenerator.generateKey();
+            raw = secretKey.getEncoded();            
+           /* 
+            byte[] encoded = secretKey.getEncoded();
+            FileOutputStream fos = null;
+			try {
+				fos = new FileOutputStream("C:/Users/Skynet-Admin/Desktop/Project-Crypto/mynotsocsecret.txt");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            try {
+				fos.write(encoded);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            try {
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			*/
             /**
              * Create an instance of cipher mentioning the name of algorithm
              *     - AES
@@ -53,6 +76,30 @@ public class EncryptFile{
         File encryptedFile = new File(destPath);
         InputStream inStream = null;
         OutputStream outStream = null;
+        
+        FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream("C:/Users/Skynet-Admin/Desktop/Project-Crypto/mynotsocsecret.txt");
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        try {
+			fos.write(raw);
+			fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        /***************/
+        
+    	System.out.println("Writing Key");
+    	System.out.println(secretKey.getAlgorithm());
+    	System.out.println("Size = "+raw.length);
+        System.out.println("toString = "+raw.toString());
+        
+        /*************/
+        
         try {
             /**
              * Initialize the cipher for encryption
@@ -94,6 +141,27 @@ public class EncryptFile{
      * @throws IOException 
      */
     public void decrypt(String srcPath, String destPath) throws IOException {
+    	
+    	FileInputStream fin = new FileInputStream("C:/Users/Skynet-Admin/Desktop/Project-Crypto/mynotsocsecret.txt");
+    	int k1=fin.available();
+    	byte []keybyte = new byte[k1];
+    	fin.read(keybyte);
+    	fin.close();
+    	SecretKey skey = new SecretKeySpec(keybyte, 0, k1, "AES");
+    	/*****************/
+    	
+    	System.out.println("Reading Key");
+    	System.out.println(skey.getAlgorithm());
+    	System.out.println("Size = "+keybyte.length);
+        System.out.println("toString = "+keybyte.toString());
+        
+        
+        System.out.println("Reading Key");
+    	System.out.println(secretKey.getAlgorithm());
+    	System.out.println("Size = "+raw.length);
+        System.out.println("toString = "+raw.toString());
+    	
+    	/*****************/
         File encryptedFile = new File(srcPath);
         File decryptedFile = new File(destPath);
         InputStream inStream = null;
@@ -102,7 +170,7 @@ public class EncryptFile{
             /**
              * Initialize the cipher for Decryption
              */
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            cipher.init(Cipher.DECRYPT_MODE, skey);
             /**
              * Initialize input and output streams
              */
