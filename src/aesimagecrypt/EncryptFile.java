@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -28,18 +29,9 @@ public class EncryptFile {
             /**
              * Create a AES key
              */
-        	OutputStream outStream = null;
+        	
             keyGenerator = KeyGenerator.getInstance("AES");
             secretKey = keyGenerator.generateKey();
-            File key = new File(destPath);
-            try {
-				outStream = new FileOutputStream(key);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            
-
             /**
              * Create an instance of cipher mentioning the name of algorithm
              *     - AES
