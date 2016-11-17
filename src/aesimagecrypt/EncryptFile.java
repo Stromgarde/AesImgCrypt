@@ -23,13 +23,15 @@ public class EncryptFile {
     SecretKey secretKey = null;
     Cipher cipher = null;
 
-    public EncryptFile() {
+    public EncryptFile(String destPath) {
         try {
             /**
              * Create a AES key
              */
+        	OutputStream outStream = null;
             keyGenerator = KeyGenerator.getInstance("AES");
             secretKey = keyGenerator.generateKey();
+            File key = new File(destPath);
 
             /**
              * Create an instance of cipher mentioning the name of algorithm
