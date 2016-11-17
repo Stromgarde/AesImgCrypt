@@ -9,7 +9,7 @@ public class UiMain {
     private Label statusLabel;
     private Panel controlPanel;
     AESImg img = new AESImg();
-	public UiMain(){
+	public UiMain() {
 	    prepareGUI();
 	 }
 	
@@ -50,15 +50,17 @@ public class UiMain {
 
         encryptButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
+        	   mainFrame.removeAll();
               /*statusLabel.setText("TODO: Launch Encrypt Menu");*/
-        	   img.UIEncrypt();
+        	   img.UIEncrypt(mainFrame);
            }
         });
 
         decryptButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
+        	   mainFrame.removeAll();
              // statusLabel.setText("TODO: Launch Decrypt Menu");
-        	   img.UIDecrypt();
+        	   img.UIDecrypt(mainFrame);
            }
         });
 

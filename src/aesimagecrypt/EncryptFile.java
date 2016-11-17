@@ -15,7 +15,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-public class EncryptFile {
+public class EncryptFile{
 	
 	KeyGenerator keyGenerator = null;
     SecretKey secretKey = null;
@@ -28,6 +28,7 @@ public class EncryptFile {
              */
         	
             keyGenerator = KeyGenerator.getInstance("AES");
+            keyGenerator.init(256);
             secretKey = keyGenerator.generateKey();
             /**
              * Create an instance of cipher mentioning the name of algorithm
