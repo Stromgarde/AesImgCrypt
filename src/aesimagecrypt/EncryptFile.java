@@ -1,18 +1,13 @@
 package aesimagecrypt;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -34,16 +29,6 @@ public class EncryptFile {
         	
             keyGenerator = KeyGenerator.getInstance("AES");
             secretKey = keyGenerator.generateKey();
-            byte[] encoded = secretKey.getEncoded(); 
-            PrintWriter writer;
-			try {
-				writer = new PrintWriter(destPath+"ThOhSoSecretKey.txt", "UTF-8");
-				writer.println(encoded);
-	            writer.close();
-			} catch (FileNotFoundException | UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
             /**
              * Create an instance of cipher mentioning the name of algorithm
              *     - AES
@@ -105,8 +90,9 @@ public class EncryptFile {
      * @param destPath
      *
      * Decrypts the file in srcPath and creates a file in destPath
+     * @throws IOException 
      */
-    public void decrypt(String srcPath, String destPath) {
+    public void decrypt(String srcPath, String destPath) throws IOException {
         File encryptedFile = new File(srcPath);
         File decryptedFile = new File(destPath);
         InputStream inStream = null;
