@@ -52,7 +52,7 @@ public class UiMain {
            public void actionPerformed(ActionEvent e) {
         	   mainFrame.removeAll();
               /*statusLabel.setText("TODO: Launch Encrypt Menu");*/
-        	   img.UIEncrypt(mainFrame);
+        	   img.UIEncrypt(mainFrame);//
            }
         });
 
