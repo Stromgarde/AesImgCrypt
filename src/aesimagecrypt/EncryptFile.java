@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -32,6 +34,16 @@ public class EncryptFile {
         	
             keyGenerator = KeyGenerator.getInstance("AES");
             secretKey = keyGenerator.generateKey();
+            byte[] encoded = secretKey.getEncoded(); 
+            PrintWriter writer;
+			try {
+				writer = new PrintWriter(destPath+"ThOhSoSecretKey.txt", "UTF-8");
+				writer.println(encoded);
+	            writer.close();
+			} catch (FileNotFoundException | UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             /**
              * Create an instance of cipher mentioning the name of algorithm
              *     - AES
