@@ -32,6 +32,13 @@ public class EncryptFile {
             keyGenerator = KeyGenerator.getInstance("AES");
             secretKey = keyGenerator.generateKey();
             File key = new File(destPath);
+            try {
+				outStream = new FileOutputStream(key);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
 
             /**
              * Create an instance of cipher mentioning the name of algorithm
