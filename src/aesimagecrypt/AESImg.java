@@ -1,5 +1,8 @@
 package aesimagecrypt;
 import java.io.IOException;
+
+import javax.swing.JFileChooser;
+
 import aesimagecrypt.EncryptFile;
 import java.awt.Button;
 import java.awt.Frame;
@@ -10,10 +13,12 @@ import java.awt.event.ActionListener;
 
 public class AESImg {
 	
-	String fileToEncrypt = "Capture.JPG";
-    String encryptedFile = "whatisthis.jpg";
-    String decryptedFile = "omgitsamiracle.jpg";
-    String directoryPath = "C:/Users/Skynet-Admin/Desktop/Project-Crypto/";
+	
+	String fileToEncrypt = null;
+	String fileToDecrypt = null;
+	String encryptedFile = "\\whatisthis.jpg";
+    String decryptedFile = "\\omgitsamiracle.jpg";
+    String directoryPath=null;
     EncryptFile encryptFile = new EncryptFile();
 
     public void  UIEncrypt(Frame mainFrame)
@@ -43,8 +48,13 @@ public class AESImg {
     	addImageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.removeAll();
-				// TODO: Add logic for setting file path
+				mainFrame.setVisible(false);// Added New code
+				//mainFrame.removeAll(); Commented out as I needed the old page to execute encryption
+				FilePath fp = new FilePath();
+                JFileChooser x=fp.getFilePath();
+				fileToEncrypt = x.getSelectedFile().getAbsolutePath();
+				directoryPath= x.getCurrentDirectory().getAbsolutePath();
+				mainFrame.setVisible(true);
 			}
 		});
     	
@@ -59,11 +69,12 @@ public class AESImg {
     	executeButton.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.removeAll();
+				mainFrame.setVisible(true);
 		    	// Actually encrypt the file
-		        System.out.println("Starting Encryption..."+directoryPath + encryptedFile);
-		        encryptFile.encrypt(directoryPath + fileToEncrypt,directoryPath + encryptedFile);
+		        System.out.println("Starting Encryption..."+fileToEncrypt+" "+encryptedFile);
+				encryptFile.encrypt(fileToEncrypt,directoryPath + encryptedFile);
 		        System.out.println("Encryption completed...");
+		        mainFrame.setVisible(false);
 			}
 		});
     	
@@ -97,8 +108,15 @@ public class AESImg {
     	addImageButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.removeAll();
+				mainFrame.setVisible(false);
 				// TODO: Add logic for setting file path
+				FilePath fp    = new FilePath();
+                JFileChooser x = fp.getFilePath();
+				fileToDecrypt  = x.getSelectedFile().toString();
+				directoryPath  = x.getCurrentDirectory().toString();
+				System.out.println(fileToDecrypt+" "+directoryPath + decryptedFile);
+				mainFrame.setVisible(true);
+				
 			}
 		});
     	
@@ -113,16 +131,17 @@ public class AESImg {
     	executeButton.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.removeAll();
+				mainFrame.setVisible(true);
 				//Actually Decrypts the Image
 				System.out.println("Starting Decryption..."+directoryPath + decryptedFile);
-		        try {
-					encryptFile.decrypt(directoryPath + encryptedFile,directoryPath + decryptedFile);
+				try {
+					encryptFile.decrypt(fileToDecrypt,directoryPath + decryptedFile);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		        System.out.println("Decryption completed...");
+		        mainFrame.setVisible(false);
 			}
 		});
 

@@ -73,6 +73,7 @@ public class EncryptFile{
      */
    public void encrypt(String srcPath, String destPath) {
         File rawFile = new File(srcPath);
+        System.out.println("SourcePath and Desftination path is :"+srcPath+" "+destPath);
         File encryptedFile = new File(destPath);
         InputStream inStream = null;
         OutputStream outStream = null;
@@ -155,12 +156,6 @@ public class EncryptFile{
     	System.out.println(skey.getAlgorithm());
     	System.out.println("Size = "+keybyte.length);
         System.out.println("toString = "+keybyte.toString());
-        
-        
-        System.out.println("Reading Key");
-    	System.out.println(secretKey.getAlgorithm());
-    	System.out.println("Size = "+raw.length);
-        System.out.println("toString = "+raw.toString());
     	
     	/*****************/
         File encryptedFile = new File(srcPath);
