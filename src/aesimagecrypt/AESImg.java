@@ -60,16 +60,16 @@ public class AESImg {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.removeAll();
-				// TODO: Add logic for setting file path
+		    	// Actually encrypt the file
+		        System.out.println("Starting Encryption..."+directoryPath + encryptedFile);
+		        encryptFile.encrypt(directoryPath + fileToEncrypt,directoryPath + encryptedFile);
+		        System.out.println("Encryption completed...");
 			}
 		});
     	
     	mainFrame.setVisible(true);
     	
-    	// Actually encrypt the file
-        System.out.println("Starting Encryption..."+directoryPath + encryptedFile);
-        encryptFile.encrypt(directoryPath + fileToEncrypt,directoryPath + encryptedFile);
-        System.out.println("Encryption completed...");
+
     }
     public void  UIDecrypt(Frame mainFrame)
     {
@@ -114,21 +114,20 @@ public class AESImg {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.removeAll();
-				// TODO: Add logic for setting file path
+				//Actually Decrypts the Image
+				System.out.println("Starting Decryption..."+directoryPath + decryptedFile);
+		        try {
+					encryptFile.decrypt(directoryPath + encryptedFile,directoryPath + decryptedFile);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		        System.out.println("Decryption completed...");
 			}
 		});
 
     	
     	mainFrame.setVisible(true);
-    	
-        System.out.println("Starting Decryption..."+directoryPath + decryptedFile);
-        try {
-			encryptFile.decrypt(directoryPath + encryptedFile,directoryPath + decryptedFile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println("Decryption completed...");
     }
    
 }

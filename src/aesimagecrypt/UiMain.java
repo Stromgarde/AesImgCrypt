@@ -51,7 +51,7 @@ public class UiMain {
         encryptButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
         	   mainFrame.removeAll();
-              /*statusLabel.setText("TODO: Launch Encrypt Menu");*/
+               statusLabel.setText("TODO: Launch Encrypt Menu");
         	   img.UIEncrypt(mainFrame);
            }
         });
@@ -59,14 +59,14 @@ public class UiMain {
         decryptButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
         	   mainFrame.removeAll();
-             // statusLabel.setText("TODO: Launch Decrypt Menu");
+               statusLabel.setText("TODO: Launch Decrypt Menu");
         	   img.UIDecrypt(mainFrame);
            }
         });
 
         dataBaseButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-             // statusLabel.setText("TODO: Launch Database Display");
+             //statusLabel.setText("TODO: Launch Database Display");
         	  
            }
         });
