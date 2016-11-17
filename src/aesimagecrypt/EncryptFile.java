@@ -71,7 +71,85 @@ public class EncryptFile{
      *
      * Encrypts the file in srcPath and creates a file in destPath
      */
-   public void encrypt(String srcPath, String destPath) {
+   public void encrypt(String srcPath, String destPath, String directoryPath,String key) 
+   {  
+	   System.out.println(srcPath+" "+destPath+" "+key);
+	   String test="novalue";
+	   if(key.toString().equals(test))
+	   {
+		   
+		   
+		   
+		   
+		   
+		   FileOutputStream fos = null;
+			try {
+				System.out.println(destPath);
+				fos = new FileOutputStream(directoryPath+"\\mynotsocsecret.txt");
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	        try {
+				fos.write(secretKey.getEncoded());
+				fos.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+		   
+		   
+		   
+		   
+		   
+		    
+		   
+	   }
+	   else
+	   {
+		   
+		   
+		   FileInputStream fin = null;
+			try {
+				fin = new FileInputStream(key);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	int k1 = 0;
+			try {
+				k1 = fin.available();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	byte []keybyte = new byte[k1];
+	    	try {
+				fin.read(keybyte);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	try {
+				fin.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    	secretKey = new SecretKeySpec(keybyte, 0, k1, "AES");
+	    	
+	        /***************/
+	        
+	    	System.out.println("Writing Key");
+	    	System.out.println(secretKey.getAlgorithm());
+	    	System.out.println("Size = "+raw.length);
+	        System.out.println("toString = "+raw.toString());
+	        
+	        /*************/
+		      
+		   
+		   
+	   }
         File rawFile = new File(srcPath);
         System.out.println("SourcePath and Desftination path is :"+srcPath+" "+destPath);
         File encryptedFile = new File(destPath);
@@ -79,29 +157,6 @@ public class EncryptFile{
         OutputStream outStream = null;
         DatabaseConnection db =new DatabaseConnection();
         db.connectToDatabase();
-        FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream("C:/Users/Skynet-Admin/Desktop/Project-Crypto/mynotsocsecret.txt");
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        try {
-			fos.write(raw);
-			fos.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        /***************/
-        
-    	System.out.println("Writing Key");
-    	System.out.println(secretKey.getAlgorithm());
-    	System.out.println("Size = "+raw.length);
-        System.out.println("toString = "+raw.toString());
-        
-        /*************/
-        
         try {
             /**
              * Initialize the cipher for encryption
@@ -142,9 +197,10 @@ public class EncryptFile{
      * Decrypts the file in srcPath and creates a file in destPath
      * @throws IOException 
      */
-    public void decrypt(String srcPath, String destPath) throws IOException {
+    public void decrypt(String srcPath, String destPath, String key) throws IOException {
     	
-    	FileInputStream fin = new FileInputStream("C:/Users/Skynet-Admin/Desktop/Project-Crypto/mynotsocsecret.txt");
+    	String KeyPath=key;
+    	FileInputStream fin = new FileInputStream(KeyPath);
     	int k1=fin.available();
     	byte []keybyte = new byte[k1];
     	fin.read(keybyte);

@@ -16,6 +16,8 @@ public class AESImg {
 	
 	String fileToEncrypt = null;
 	String fileToDecrypt = null;
+	String keyToDecrypt = null;
+	String keyToUse = "novalue";
 	String encryptedFile = "\\whatisthis.jpg";
     String decryptedFile = "\\omgitsamiracle.jpg";
     String directoryPath=null;
@@ -50,10 +52,10 @@ public class AESImg {
 			public void actionPerformed(ActionEvent e) {
 				mainFrame.setVisible(false);// Added New code
 				//mainFrame.removeAll(); Commented out as I needed the old page to execute encryption
-				FilePath fp = new FilePath();
-                JFileChooser x=fp.getFilePath();
-				fileToEncrypt = x.getSelectedFile().getAbsolutePath();
-				directoryPath= x.getCurrentDirectory().getAbsolutePath();
+				FilePath fp    = new FilePath();
+                JFileChooser x = fp.getFilePath();
+                fileToEncrypt  = x.getSelectedFile().getAbsolutePath();
+                directoryPath= x.getCurrentDirectory().getAbsolutePath();
 				mainFrame.setVisible(true);
 			}
 		});
@@ -61,8 +63,13 @@ public class AESImg {
     	loadKeyButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.removeAll();
-				// TODO: Add logic for setting key
+				mainFrame.setVisible(false);// Added New code
+				//mainFrame.removeAll(); Commented out as I needed the old page to execute encryption
+				FilePath fp = new FilePath();
+                JFileChooser x=fp.getFilePath();
+                keyToUse = x.getSelectedFile().getAbsolutePath();
+				directoryPath= x.getCurrentDirectory().getAbsolutePath();
+				mainFrame.setVisible(true);
 			}
 		});
     	
@@ -72,7 +79,7 @@ public class AESImg {
 				mainFrame.setVisible(true);
 		    	// Actually encrypt the file
 		        System.out.println("Starting Encryption..."+fileToEncrypt+" "+encryptedFile);
-				encryptFile.encrypt(fileToEncrypt,directoryPath + encryptedFile);
+				encryptFile.encrypt(fileToEncrypt,directoryPath + encryptedFile,directoryPath,keyToUse);
 		        System.out.println("Encryption completed...");
 		        mainFrame.setVisible(false);
 			}
@@ -123,8 +130,13 @@ public class AESImg {
     	loadKeyButton.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainFrame.removeAll();
-				// TODO: Add logic for setting key
+				mainFrame.setVisible(false);
+				// TODO: Add logic for setting file path
+				FilePath fp    = new FilePath();
+                JFileChooser x = fp.getFilePath();
+				keyToDecrypt  = x.getSelectedFile().toString();
+				System.out.println(fileToDecrypt+" "+directoryPath + decryptedFile);
+				mainFrame.setVisible(true);
 			}
 		});
     	
@@ -135,7 +147,7 @@ public class AESImg {
 				//Actually Decrypts the Image
 				System.out.println("Starting Decryption..."+directoryPath + decryptedFile);
 				try {
-					encryptFile.decrypt(fileToDecrypt,directoryPath + decryptedFile);
+					encryptFile.decrypt(fileToDecrypt,directoryPath + decryptedFile,keyToDecrypt);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
