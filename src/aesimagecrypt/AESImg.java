@@ -11,14 +11,14 @@ public class AESImg {
 
     public void  UIEncrypt()
     {
-        System.out.println("Starting Encryption...");
+        System.out.println("Starting Encryption..."+directoryPath + encryptedFile);
         encryptFile.encrypt(directoryPath + fileToEncrypt,
                 directoryPath + encryptedFile);
         System.out.println("Encryption completed...");
     }
     public void  UIDecrypt()
     {
-        System.out.println("Starting Decryption...");
+        System.out.println("Starting Decryption..."+directoryPath + decryptedFile);
         encryptFile.decrypt(directoryPath + encryptedFile,
                 directoryPath + decryptedFile);
         System.out.println("Decryption completed...");
