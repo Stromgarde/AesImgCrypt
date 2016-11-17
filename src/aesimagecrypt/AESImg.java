@@ -14,7 +14,7 @@ public class AESImg {
     String encryptedFile = "whatisthis.jpg";
     String decryptedFile = "omgitsamiracle.jpg";
     String directoryPath = "C:/Users/Skynet-Admin/Desktop/Project-Crypto/";
-    EncryptFile encryptFile = new EncryptFile(directoryPath);
+    EncryptFile encryptFile = new EncryptFile();
 
     public void  UIEncrypt(Frame mainFrame)
     {

@@ -22,7 +22,7 @@ public class EncryptFile{
     SecretKey secretKey = null;
     Cipher cipher = null;
     byte[] raw = null;
-    public EncryptFile(String destPath) {
+    public EncryptFile() {
         try {
             /**
              * Create a AES key
@@ -76,7 +76,8 @@ public class EncryptFile{
         File encryptedFile = new File(destPath);
         InputStream inStream = null;
         OutputStream outStream = null;
-        
+        DatabaseConnection db =new DatabaseConnection();
+        db.connectToDatabase();
         FileOutputStream fos = null;
 		try {
 			fos = new FileOutputStream("C:/Users/Skynet-Admin/Desktop/Project-Crypto/mynotsocsecret.txt");
