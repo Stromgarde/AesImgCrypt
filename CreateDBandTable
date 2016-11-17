@@ -1,0 +1,3 @@
+CREATE DATABASE thedb;
+USE thedb;
+CREATE TABLE pathhash (filepath VARCHAR(260), hashvalue VARCHAR(128));
