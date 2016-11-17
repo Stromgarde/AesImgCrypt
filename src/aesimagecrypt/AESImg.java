@@ -3,6 +3,8 @@ import java.awt.Button;
 import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Label;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AESImg {
 	
@@ -35,6 +37,31 @@ public class AESImg {
     	mainFrame.add(executeButton);
     	mainFrame.add(executeLabel);
     	
+    	// Add listeners to perforate appropriate actions
+    	addImageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.removeAll();
+				// TODO: Add logic for setting file path
+			}
+		});
+    	
+    	loadKeyButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.removeAll();
+				// TODO: Add logic for setting key
+			}
+		});
+    	
+    	executeButton.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.removeAll();
+				// TODO: Add logic for setting file path
+			}
+		});
+    	
     	mainFrame.setVisible(true);
     	
     	// Actually encrypt the file
@@ -45,7 +72,7 @@ public class AESImg {
     }
     public void  UIDecrypt(Frame mainFrame)
     {
-    	// Set up grid layout/
+    	// Set up grid layout
     	mainFrame.setLayout(new GridLayout(3,2));
     	
     	// Add the buttons
@@ -58,13 +85,38 @@ public class AESImg {
     	Label executeLabel = new Label("");
     	
     	// Add everything to layout
-    	
     	mainFrame.add(addImageButton);
     	mainFrame.add(addImageLabel);
     	mainFrame.add(loadKeyButton);
     	mainFrame.add(loadKeyLabel);
     	mainFrame.add(executeButton);
     	mainFrame.add(executeLabel);
+    	
+    	// Add listeners to perforate appropriate actions
+    	addImageButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.removeAll();
+				// TODO: Add logic for setting file path
+			}
+		});
+    	
+    	loadKeyButton.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.removeAll();
+				// TODO: Add logic for setting key
+			}
+		});
+    	
+    	executeButton.addActionListener(new ActionListener() {		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.removeAll();
+				// TODO: Add logic for setting file path
+			}
+		});
+
     	
     	mainFrame.setVisible(true);
     	
