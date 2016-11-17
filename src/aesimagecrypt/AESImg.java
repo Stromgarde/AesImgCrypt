@@ -45,7 +45,7 @@ public class AESImg {
     }
     public void  UIDecrypt(Frame mainFrame)
     {
-    	// Set up grid layout
+    	// Set up grid layout/
     	mainFrame.setLayout(new GridLayout(3,2));
     	
     	// Add the buttons
