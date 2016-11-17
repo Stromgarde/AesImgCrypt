@@ -58,8 +58,9 @@ public class UiMain {
 
         decryptButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
+        	   mainFrame.removeAll();
              // statusLabel.setText("TODO: Launch Decrypt Menu");
-        	   img.UIDecrypt();
+        	   img.UIDecrypt(mainFrame);
            }
         });
 
