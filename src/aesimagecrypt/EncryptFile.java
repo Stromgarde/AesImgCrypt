@@ -101,7 +101,7 @@ public class EncryptFile {
         OutputStream outStream = null;
         try {
             /**
-             * Initialize the cipher for decryption
+             * Initialize the cipher for Decryption
              */
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
             /**
