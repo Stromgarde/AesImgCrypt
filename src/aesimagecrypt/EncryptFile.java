@@ -34,7 +34,7 @@ public class EncryptFile {
             secretKey = keyGenerator.generateKey();
             /**
              * Create an instance of cipher mentioning the name of algorithm
-             *     - AES
+             *     -  AES
              */
             cipher = Cipher.getInstance("AES");
         } catch (NoSuchPaddingException ex) {
