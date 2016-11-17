@@ -9,7 +9,7 @@ public class UiMain {
     private Label statusLabel;
     private Panel controlPanel;
     AESImg img = new AESImg();
-	public UiMain(){
+	public UiMain() {
 	    prepareGUI();
 	 }
 	
