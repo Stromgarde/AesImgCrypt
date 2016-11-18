@@ -36,28 +36,6 @@ public class EncryptFile{
             keyGenerator = KeyGenerator.getInstance("AES");
             secretKey = keyGenerator.generateKey();
             raw = secretKey.getEncoded();            
-           /* 
-            byte[] encoded = secretKey.getEncoded();
-            FileOutputStream fos = null;
-			try {
-				fos = new FileOutputStream("C:/Users/Skynet-Admin/Desktop/Project-Crypto/mynotsocsecret.txt");
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            try {
-				fos.write(encoded);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            try {
-				fos.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
             /**
              * Create an instance of cipher mentioning the name of algorithm
              *     - AES
