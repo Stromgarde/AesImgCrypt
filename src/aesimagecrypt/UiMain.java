@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 public class UiMain {
 	
     private Frame mainFrame;
