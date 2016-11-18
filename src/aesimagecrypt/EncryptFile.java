@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -15,6 +18,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JOptionPane;
+
 import org.apache.commons.codec.digest.DigestUtils;
 public class EncryptFile{
 	
@@ -101,9 +106,7 @@ public class EncryptFile{
 		   
 	   }
 	   else
-	   {
-		   
-		   
+	   { 
 		   FileInputStream fin = null;
 			try {
 				fin = new FileInputStream(key);
@@ -183,7 +186,9 @@ public class EncryptFile{
         
         
         try {
-			String checksum = DigestUtils.md5Hex(new FileInputStream(encryptedFile));
+        	FileInputStream f =new FileInputStream(encryptedFile);
+			String checksum = DigestUtils.md5Hex(f);
+			f.close();
 	        DatabaseConnection db =new DatabaseConnection();
 	        db.connectToDatabase(encryptedFile.getAbsolutePath(),checksum);
 		} catch (FileNotFoundException e) {
@@ -205,7 +210,25 @@ public class EncryptFile{
      * @throws IOException 
      */
     public void decrypt(String srcPath, String destPath, String key) throws IOException {
-    	DatabaseConnection db =new DatabaseConnection();
+    	File encryptedFile = new File(srcPath);
+        File decryptedFile = new File(destPath);
+    	FileInputStream f =new FileInputStream(encryptedFile);
+		String checksum = DigestUtils.md5Hex(f);
+		String checksum1=null;
+		f.close();
+        DatabaseConnection db =new DatabaseConnection();
+        ResultSet rs= db.displayDataBase();
+        try {
+			while(rs.next())
+			{
+				checksum1=rs.getString("hashvalue");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        if(checksum.equals(checksum1))
+        {
     	String KeyPath=key;
     	FileInputStream fin = new FileInputStream(KeyPath);
     	int k1=fin.available();
@@ -221,8 +244,7 @@ public class EncryptFile{
         System.out.println("toString = "+keybyte.toString());
     	
     	/*****************/
-        File encryptedFile = new File(srcPath);
-        File decryptedFile = new File(destPath);
+        
         InputStream inStream = null;
         OutputStream outStream = null;
         try {
@@ -254,6 +276,12 @@ public class EncryptFile{
             System.out.println(ex);
         } catch (IOException ex) {
             System.out.println(ex);
+        }
+        }
+        else
+        {
+        	JOptionPane.showMessageDialog(null, "Cannot Decrypt. Never Encrypted File with this Key. Hash Mismatch:", "InfoBox: " + "Hmmm..???", JOptionPane.INFORMATION_MESSAGE);
+        	System.exit(0);
         }
     }
 }
