@@ -81,6 +81,7 @@ public class AESImg {
 				encryptFile.encrypt(fileToEncrypt,directoryPath + encryptedFile,directoryPath,keyToUse);
 		        System.out.println("Encryption completed...");
 		        mainFrame.setVisible(false);
+		        System.exit(0);
 			}
 		});
     	
@@ -153,6 +154,7 @@ public class AESImg {
 				}
 		        System.out.println("Decryption completed...");
 		        mainFrame.setVisible(false);
+		        System.exit(0);
 			}
 		});
 
