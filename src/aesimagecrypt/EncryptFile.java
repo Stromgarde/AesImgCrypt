@@ -15,7 +15,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-
+import org.apache.commons.codec.digest.DigestUtils;
 public class EncryptFile{
 	
 	KeyGenerator keyGenerator = null;
@@ -155,8 +155,6 @@ public class EncryptFile{
         File encryptedFile = new File(destPath);
         InputStream inStream = null;
         OutputStream outStream = null;
-        DatabaseConnection db =new DatabaseConnection();
-        db.connectToDatabase();
         try {
             /**
              * Initialize the cipher for encryption
@@ -187,6 +185,20 @@ public class EncryptFile{
         } catch (IOException ex) {
             System.out.println(ex);
         }
+        
+        
+        try {
+			String checksum = DigestUtils.md5Hex(new FileInputStream(encryptedFile));
+	        DatabaseConnection db =new DatabaseConnection();
+	        db.connectToDatabase(encryptedFile.getAbsolutePath(),checksum);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
     }
 
     /**

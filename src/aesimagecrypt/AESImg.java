@@ -2,7 +2,6 @@ package aesimagecrypt;
 import java.io.IOException;
 
 import javax.swing.JFileChooser;
-
 import aesimagecrypt.EncryptFile;
 import java.awt.Button;
 import java.awt.Frame;
