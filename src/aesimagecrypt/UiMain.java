@@ -1,6 +1,8 @@
 package aesimagecrypt;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UiMain {
 	
@@ -51,7 +53,7 @@ public class UiMain {
         encryptButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
         	   mainFrame.removeAll();
-               statusLabel.setText("TODO: Launch Encrypt Menu");
+              // statusLabel.setText("TODO: Launch Encrypt Menu");
         	   img.UIEncrypt(mainFrame);
            }
         });
@@ -59,7 +61,7 @@ public class UiMain {
         decryptButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
         	   mainFrame.removeAll();
-               statusLabel.setText("TODO: Launch Decrypt Menu");
+               //statusLabel.setText("TODO: Launch Decrypt Menu");
         	   img.UIDecrypt(mainFrame);
            }
         });
@@ -67,7 +69,19 @@ public class UiMain {
         dataBaseButton.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
              //statusLabel.setText("TODO: Launch Database Display");
-        	  
+        	   DatabaseConnection db = new DatabaseConnection();
+        	   ResultSet rs= db.displayDataBase();
+        	  try {
+				while(rs.next())
+				  {
+					  String filepath=rs.getString("filepath");
+					  String checksum=rs.getString("hashvalue");
+					  statusLabel.setText("Filepath:"+" "+filepath+"         "+"CheckSum:"+" "+checksum);
+				  }
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
            }
         });
 

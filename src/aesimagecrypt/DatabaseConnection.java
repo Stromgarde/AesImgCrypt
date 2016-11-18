@@ -63,4 +63,49 @@ public class DatabaseConnection {
 		
 		
 			}
+	
+	public ResultSet displayDataBase()
+	{
+		
+		ResultSet rs=null;
+		PreparedStatement ps = null;
+		String url="jdbc:mysql://localhost:3306/thedb";
+		String userName="root";
+		String password="";
+        try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        Connection con = null;
+		try {
+			con = DriverManager.getConnection(url,userName,password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String query = "SELECT distinct filepath, hashvalue FROM pathhash";
+		try {
+			ps = con.prepareStatement(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			rs = ps.executeQuery(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
 }

@@ -97,11 +97,6 @@ public class EncryptFile{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
-		   
-		   
-		   
-		   
-		   
 		    
 		   
 	   }
@@ -210,7 +205,7 @@ public class EncryptFile{
      * @throws IOException 
      */
     public void decrypt(String srcPath, String destPath, String key) throws IOException {
-    	
+    	DatabaseConnection db =new DatabaseConnection();
     	String KeyPath=key;
     	FileInputStream fin = new FileInputStream(KeyPath);
     	int k1=fin.available();
